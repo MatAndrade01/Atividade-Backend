@@ -28,7 +28,7 @@ app.get('/carros/:id', (req, res) => {
     }
 });
 
-const arrCarros = [
+let arrCarros = [
     {
         id: 1,
         nome: 'Matheus',
@@ -48,8 +48,20 @@ const arrCarros = [
     }
 ]
 
+app.get('/carros', (req, res) => {
+    console.log(arrCarros);
+    res.send(arrCarros);
+  })
 
-
+app.delete('/carros/delete/:id', (req, res) => {
+    const carId = req.params.id;
+    arrCarros = arrCarros.filter(car => car.id !== parseInt(carId));
+  
+    res.send(`Carro ${carId} excluído com sucesso!`);
+  
+    console.log(arrCarros);
+  
+  });
 // iniciando o servidor
 app.listen(3000);
 
